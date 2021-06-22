@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/estilos.css">
+    <title>Apock tutoriales</title>
+</head>
+
+<body>
+    <main id="app">
+        <nav>
+            Ejemplo de Carrito de Compra con VueJS
+        </nav>
+        <aside>
+            carrito
+            <span><i class="icon-cart"></i>{{ carrito}}</span>
+            <button class="boton" v-on:click="comprar()">Comprar</button>
+        </aside>
+        <section>
+            <div class="producto">
+                <img v-bind:src="imagen" width="350">
+            </div>
+            <div class="datos">
+                <h1>{{ titulo }}</h1>
+                <dl>
+                    <td>Cantidades: {{ inventario }}</td>
+                    <dt v-if="inventario > 5">Disponible</dt>
+                    <dt v-else-if="inventario > 0">Casi agotado</dt>
+                    <dt v-else>Agotado </dt>
+                </dl>
+                <h2>Detalles</h2>
+                <ul>
+                    <li v-for="item of detalles">
+                        {{ item }}
+                    </li>
+                </ul>
+                <h2>Color</h2>
+                <button 
+                    v-bind:class="['color', item.color]" 
+                    v-for="( item, index ) of variantes"
+                    @mouseover="seleccionado( index )"
+                    ></button>
+                <div>
+                    <button class="boton-agregar" 
+                    v-on:click="agregar()"
+                    :disabled="cantidad"
+                    ><i class="icon-plus"></i>
+                        agregar carrito
+                    </button>
+                    <button class="boton-quitar" v-on:click="quitar()">
+                        <i class="icon-minus"></i>
+                        quitar carrito
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="mensaje" v-show="compra">
+            Compra realizada
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
